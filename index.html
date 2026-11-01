@@ -21,7 +21,7 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 15px;
+      padding: 10px;
       overflow-x: hidden;
     }
 
@@ -82,22 +82,26 @@
       transform: translateY(-2px);
     }
 
-    /* İÇERİK EKRANI */
+    /* İÇERİK EKRANI - GENİŞLETİLDİ */
     .content-container {
       display: none;
-      width: 100%;
-      max-width: 900px;
+      width: 96%;
+      max-width: 1200px; /* Daha geniş alan */
+      height: 92vh; /* Ekranı tam doldurması için dikey alan */
       background: #1f2833;
       border-radius: 16px;
       border: 1px solid #45a29e;
-      padding: 25px;
+      padding: 20px;
       box-shadow: 0 0 30px rgba(0, 0, 0, 0.8);
+      display: none;
+      flex-direction: column;
     }
     .content-header {
       text-align: center;
       border-bottom: 2px solid #45a29e;
-      padding-bottom: 15px;
-      margin-bottom: 20px;
+      padding-bottom: 12px;
+      margin-bottom: 15px;
+      flex-shrink: 0;
     }
     .content-header h2 {
       color: #66fcf1;
@@ -109,13 +113,14 @@
     .score-table {
       width: 100%;
       border-collapse: collapse;
-      margin-bottom: 20px;
+      margin-bottom: 15px;
       background: #0b0c10;
       border-radius: 8px;
       overflow: hidden;
       border: 1px solid #45a29e;
       text-align: center;
-      font-size: 13px;
+      font-size: 14px;
+      flex-shrink: 0;
     }
     .score-table th, .score-table td {
       padding: 8px 4px;
@@ -135,9 +140,10 @@
       background: #0b0c10;
       border-left: 4px solid #ff0055;
       border-radius: 8px;
-      padding: 18px;
-      margin-bottom: 25px;
+      padding: 15px;
+      margin-bottom: 20px;
       line-height: 1.6;
+      flex-shrink: 0;
     }
     .story-title {
       color: #ff0055;
@@ -147,17 +153,17 @@
     }
     .story-text {
       color: #d1d5db;
-      font-size: 14.5px;
+      font-size: 15px;
     }
 
-    /* KAYDIRILABİLİR SORU ALANI */
+    /* KAYDIRILABİLİR SORU ALANI - TAM GENİŞLİK */
     .questions-scroll-area {
-      max-height: 60vh;
+      flex-grow: 1;
       overflow-y: auto;
       padding-right: 10px;
     }
     .questions-scroll-area::-webkit-scrollbar {
-      width: 8px;
+      width: 10px;
     }
     .questions-scroll-area::-webkit-scrollbar-track {
       background: #0b0c10;
@@ -179,15 +185,15 @@
     }
     .question-title {
       color: #66fcf1;
-      font-size: 16px;
+      font-size: 17px;
       font-weight: 700;
       margin-bottom: 10px;
     }
     .answer-text {
       color: #ffffff;
-      font-size: 15px;
+      font-size: 15.5px;
       background: #141b22;
-      padding: 12px;
+      padding: 14px;
       border-radius: 6px;
       border: 1px dashed #45a29e;
       white-space: pre-line;
@@ -327,7 +333,7 @@
   <script>
     function openQuestions() {
       document.getElementById('landing-screen').style.display = 'none';
-      document.getElementById('questions-screen').style.display = 'block';
+      document.getElementById('questions-screen').style.display = 'flex'; // Genişletilmiş ekran için flex yapıldı
     }
 
     // GÜVENLİK SİSTEMİ
