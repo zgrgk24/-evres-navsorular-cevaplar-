@@ -48,9 +48,20 @@
       font-weight: 800;
       font-size: 16px;
       letter-spacing: 1.5px;
-      margin-bottom: 30px;
+      margin-bottom: 15px;
       text-transform: uppercase;
-      text-shadow: 0 0 8px rgba(ff, 0, 85, 0.4);
+      text-shadow: 0 0 8px rgba(255, 0, 85, 0.4);
+    }
+    .exam-notice {
+      background: rgba(255, 0, 85, 0.15);
+      border: 1px solid #ff0055;
+      color: #ff4d6d;
+      font-weight: bold;
+      font-size: 14px;
+      padding: 10px;
+      border-radius: 8px;
+      margin-bottom: 25px;
+      text-shadow: 0 0 5px rgba(255, 0, 85, 0.5);
     }
     .btn-main {
       background: #66fcf1;
@@ -213,6 +224,7 @@
   <div id="landing-screen" class="landing-card">
     <h1>ÇEVRE BİLİMİ SINAV SORULARI VE CEVAPLARI</h1>
     <div class="author-tag">ÖZGÜR GÖK</div>
+    <div class="exam-notice">🔥 UYARI: Sınavda çıkacak sorularla birebir aynıdır!</div>
     <button class="btn-main" onclick="openQuestions()">SORULARI VE CEVAPLARI GÖR</button>
   </div>
 
@@ -220,7 +232,8 @@
   <div id="questions-screen" class="content-container">
     <div class="content-header">
       <h2>Çevre Bilimi Sınav Soruları & Cevapları</h2>
-      <div class="author-tag" style="margin-bottom:0; font-size:14px;">Hazırlayan: ÖZGÜR GÖK</div>
+      <div class="author-tag" style="margin-bottom:5px; font-size:14px;">Hazırlayan: ÖZGÜR GÖK</div>
+      <div style="color: #ff4d6d; font-size: 13px; font-weight: bold;">(Sınavda çıkacak sorularla birebir aynıdır)</div>
     </div>
 
     <div class="questions-scroll-area">
