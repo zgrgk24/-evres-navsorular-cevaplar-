@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Çevre Bilimi Sınav Soruları ve Cevapları - Özgür GÖK</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+    body {
+      background-color: #0b0c10;
+      color: #c5c6c7;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 15px;
+      overflow-x: hidden;
+    }
+
+    /* GİRİŞ EKRANI */
+    .landing-card {
+      background: #1f2833;
+      border: 2px solid #66fcf1;
+      box-shadow: 0 0 25px rgba(102, 252, 241, 0.25);
+      border-radius: 16px;
+      padding: 40px 25px;
+      text-align: center;
+      max-width: 500px;
+      width: 100%;
+    }
+    .landing-card h1 {
+      color: #66fcf1;
+      font-size: 24px;
+      margin-bottom: 12px;
+      letter-spacing: 1px;
+      text-shadow: 0 0 10px rgba(102, 252, 241, 0.4);
+    }
+    .author-tag {
+      color: #ff0055;
+      font-weight: 800;
+      font-size: 16px;
+      letter-spacing: 1.5px;
+      margin-bottom: 30px;
+      text-transform: uppercase;
+      text-shadow: 0 0 8px rgba(ff, 0, 85, 0.4);
+    }
+    .btn-main {
+      background: #66fcf1;
+      color: #0b0c10;
+      font-size: 18px;
+      font-weight: 800;
+      padding: 15px 30px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 12px rgba(102, 252, 241, 0.3);
+    }
+    .btn-main:hover {
+      background: #ff0055;
+      color: #fff;
+      box-shadow: 0 0 20px #ff0055;
+      transform: translateY(-2px);
+    }
+
+    /* İÇERİK EKRANI */
+    .content-container {
+      display: none;
+      width: 100%;
+      max-width: 900px;
+      background: #1f2833;
+      border-radius: 16px;
+      border: 1px solid #45a29e;
+      padding: 25px;
+      box-shadow: 0 0 30px rgba(0, 0, 0, 0.8);
+    }
+    .content-header {
+      text-align: center;
+      border-bottom: 2px solid #45a29e;
+      padding-bottom: 15px;
+      margin-bottom: 20px;
+    }
+    .content-header h2 {
+      color: #66fcf1;
+      font-size: 22px;
+      margin-bottom: 5px;
+    }
+
+    /* PUAN TABLOSU */
+    .score-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+      background: #0b0c10;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid #45a29e;
+      text-align: center;
+      font-size: 13px;
+    }
+    .score-table th, .score-table td {
+      padding: 8px 4px;
+      border: 1px solid #1f2833;
+    }
+    .score-table th {
+      background: #45a29e;
+      color: #0b0c10;
+      font-weight: bold;
+    }
+    .score-table td {
+      color: #66fcf1;
+    }
+
+    /* HİKÂYE KUTUSU */
+    .story-card {
+      background: #0b0c10;
+      border-left: 4px solid #ff0055;
+      border-radius: 8px;
+      padding: 18px;
+      margin-bottom: 25px;
+      line-height: 1.6;
+    }
+    .story-title {
+      color: #ff0055;
+      font-size: 16px;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+    .story-text {
+      color: #d1d5db;
+      font-size: 14.5px;
+    }
+
+    /* KAYDIRILABİLİR SORU ALANI */
+    .questions-scroll-area {
+      max-height: 60vh;
+      overflow-y: auto;
+      padding-right: 10px;
+    }
+    .questions-scroll-area::-webkit-scrollbar {
+      width: 8px;
+    }
+    .questions-scroll-area::-webkit-scrollbar-track {
+      background: #0b0c10;
+      border-radius: 4px;
+    }
+    .questions-scroll-area::-webkit-scrollbar-thumb {
+      background: #66fcf1;
+      border-radius: 4px;
+    }
+
+    /* SORU CEVAP KARTLARI */
+    .qa-card {
+      background: #0b0c10;
+      border-left: 4px solid #66fcf1;
+      border-radius: 8px;
+      padding: 18px;
+      margin-bottom: 20px;
+      line-height: 1.6;
+    }
+    .question-title {
+      color: #66fcf1;
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+    .answer-text {
+      color: #ffffff;
+      font-size: 15px;
+      background: #141b22;
+      padding: 12px;
+      border-radius: 6px;
+      border: 1px dashed #45a29e;
+      white-space: pre-line;
+    }
+
+    /* GÜVENLİK UYARI EKRANI */
+    #security-overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; width: 100vw; height: 100vh;
+      background: #000;
+      color: #ff0055;
+      font-size: 22px;
+      font-weight: bold;
+      z-index: 99999;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    @media print {
+      body { display: none !important; }
+    }
+  </style>
+</head>
+<body oncontextmenu="return false;">
+
+  <!-- GÜVENLİK PERDESİ -->
+  <div id="security-overlay">
+    <div>⚠️ GÜVENLİK UYARISI<br><span style="font-size:15px; color:#fff; margin-top:10px; display:block;">Ekran görüntüsü almak veya başka sekmeye geçmek yasaktır.</span></div>
+  </div>
+
+  <!-- GİRİŞ EKRANI -->
+  <div id="landing-screen" class="landing-card">
+    <h1>ÇEVRE BİLİMİ SINAV SORULARI VE CEVAPLARI</h1>
+    <div class="author-tag">ÖZGÜR GÖK</div>
+    <button class="btn-main" onclick="openQuestions()">SORULARI VE CEVAPLARI GÖR</button>
+  </div>
+
+  <!-- İÇERİK EKRANI -->
+  <div id="questions-screen" class="content-container">
+    <div class="content-header">
+      <h2>Çevre Bilimi Sınav Soruları & Cevapları</h2>
+      <div class="author-tag" style="margin-bottom:0; font-size:14px;">Hazırlayan: ÖZGÜR GÖK</div>
+    </div>
+
+    <div class="questions-scroll-area">
+
+      <!-- PUAN TABLOSU -->
+      <table class="score-table">
+        <tr>
+          <th>PUAN</th>
+          <th>1.S</th><th>2.S</th><th>3.S</th><th>4.S</th><th>5.S</th>
+          <th>6.S</th><th>7.S</th><th>8.S</th><th>9.S</th><th>10.S</th>
+        </tr>
+        <tr>
+          <th>DEĞER</th>
+          <td>10</td><td>10</td><td>10</td><td>10</td><td>10</td>
+          <td>10</td><td>10</td><td>10</td><td>10</td><td>10</td>
+        </tr>
+      </table>
+
+      <!-- HİKÂYE -->
+      <div class="story-card">
+        <div class="story-title">KURUMUŞ GÖLÜN HİKÂYESİ (1, 2 ve 3. Sorular İçin)</div>
+        <div class="story-text">
+          Türkiye'nin bereketli topraklarında yer alan masmavi bir göl, çevresindeki köylere hayat veriyordu. İnsanlar bu gölü tarlalarını sulamak ve balık tutmak için sınırsız bir kaynakmış gibi kullandılar. Tasarruflu damlama sulama yöntemleri yerine suyu vahşi ve aşırı bir şekilde harcadılar. Ayrıca gölü besleyen yer altı sularını izinsiz açtıkları çok sayıda kuyuyla hızla çektiler. Göl yavaş yavaş çekildi ve yerini çatlamış, kuru bir toprağa bıraktı. Gölün kurumasıyla birlikte göçmen kuşlar bölgeyi terk etti, balıkçılık bitti ve tarım toprakları tuzlanarak verimsizleşti.
+        </div>
+      </div>
+
+      <!-- SORULAR VE CEVAPLAR -->
+      <div class="qa-card">
+        <div class="question-title">SORU 1. Yukarıdaki metinde gölün kurumasına ve suyun tükenmesine yol açan temel hatalı insan davranışlarından 2 tanesini yazınız.</div>
+        <div class="answer-text"><strong>CEVAP:</strong>
+1. Suyu tasarruflu yöntemler yerine israf ederek ve kontrolsüzce harcamak.
+2. Gölü besleyen yer altı sularını aşırı sayıda kaçak kuyu açarak çekmek.</div>
+      </div>
+
+      <div class="qa-card">
+        <div class="question-title">SORU 2. Gölün kuruması, o bölgedeki canlıları (kuşları, balıkları) ve insanların yaşamını nasıl etkilemiştir?</div>
+        <div class="answer-text"><strong>CEVAP:</strong> Kuşlar bölgeyi terk etmiş ve balıklar yok olmuştur. İnsanların ise balıkçılık geçim kaynağı bitmiş, tarım toprakları tuzlandığı için ürün verimi düşmüştür.</div>
+      </div>
+
+      <div class="qa-card">
+        <div class="question-title">SORU 3. Bu hikâyeden hareketle doğal kaynakları sınırsızmış gibi kullanmanın (Sürdürülebilirlik ilkesine uymamanın) sonuçlarını açıklayınız.</div>
+        <div class="answer-text"><strong>CEVAP:</strong> Doğal kaynakların aşırı tükenmesine, çevredeki doğal dengenin bozulmasına ve gelecek nesillerin bu kaynaklardan mahrum kalmasına yol açar.</div>
+      </div>
+
+      <div class="qa-card">
+        <div class="question-title">SORU 4. Doğada bulunan bazı kaynaklar kullandıkça tükenmez ve kendini yeniler; bazı kaynaklar ise tüketildiğinde biter ve oluşması milyonlarca yıl sürer. Yenilenebilir ve Yenilenemeyen doğal kaynakları açıklayarak her birine ikişer örnek veriniz.</div>
+        <div class="answer-text"><strong>CEVAP:</strong>
+• <strong>Yenilenebilir Kaynaklar:</strong> Doğada sürekli bulunan ve tükenmeyen kaynaklardır. Örnek: Güneş, Rüzgâr.
+• <strong>Yenilenemeyen Kaynaklar:</strong> Kullanıldıkça biten ve oluşumu çok uzun sürer. Örnek: Kömür, Petrol.</div>
+      </div>
+
+      <div class="qa-card">
+        <div class="question-title">SORU 5. İslam bilgini Kerecî, 10. yüzyılda suyun yer altında korunması ve buharlaşmadan tarlalara taşınması üzerine bilimsel çalışmalar yapmıştır. Kerecî'nin suyun korunması ve yer altında taşınması için geliştirdiği sistemin temel amacı nedir?</div>
+        <div class="answer-text"><strong>CEVAP:</strong> Suyun sıcak havalarda buharlaşıp kaybolmasını önlemek ve suyun kirlenmeden, verimli bir şekilde tarlalara ulaştırılmasını sağlamaktır.</div>
+      </div>
+
+      <div class="qa-card">
+        <div class="question-title">SORU 6. Şehirlerde herkesin kendi özel aracıyla trafiğe çıkması egzoz gazlarını artırmakta ve hava kirliliğine neden olmaktadır. Ulaşımda bireysel araçlar yerine otobüs, metro veya tren gibi toplu taşıma araçlarını tercih etmenin çevreye ve sağlığımıza faydalarını yazınız.</div>
+        <div class="answer-text"><strong>CEVAP:</strong> Atmosfere yayılan zararlı egzoz gazlarını ve hava kirliliğini azaltır. Böylece akciğer ve solunum yolu hastalıklarının önüne geçilmesine katkı sağlar.</div>
+      </div>
+
+      <div class="qa-card">
+        <div class="question-title">SORU 7. Mustafa Kemal Atatürk, doğaya ve ağaçlara büyük önem vermiş; Ankara'nın bozkır topraklarında yemyeşil bir alan oluşturmuştur. Atatürk döneminde doğayı ve ormanları korumak amacıyla yapılan çalışmalardan 2 tanesini yazınız.</div>
+        <div class="answer-text"><strong>CEVAP:</strong>
+1. Ankara'da çorak bir alanda Atatürk Orman Çiftliği'nin kurulması.
+2. Ormanları korumak ve geliştirmek için özel Orman Kanunları'nın çıkarılması.</div>
+      </div>
+
+      <div class="qa-card">
+        <div class="question-title">SORU 8. Okullarda ve evlerimizde kâğıt, plastik ve cam atıklar ayrı kutularda toplanarak yeniden kullanılabilir malzemelere dönüştürülmektedir. Ülkemizde yürütülen 'Sıfır Atık' projesinin temel amacı nedir? Doğaya nasıl katkı sağlar?</div>
+        <div class="answer-text"><strong>CEVAP:</strong> Temel amacı israfı önlemek ve çöpleri geri dönüştürmektir. Ağaçların kesilmesini engeller, çöp miktarını azaltır ve doğal kaynaklarımızı korur.</div>
+      </div>
+
+      <div class="qa-card">
+        <div class="question-title">SORU 9. Ormanlar ağaç kestikçe yerine yeni fidanlar dikilirse kendini koruyabilir; fakat tamamen yakılır veya kesilirse yok olup gider. Ormanların 'belirli şartlarda kendini yenileyebilen kaynak' sayılmasının sebebi nedir?</div>
+        <div class="answer-text"><strong>CEVAP:</strong> Kesilen ağaçların yerine yenileri dikilip orman korunduğunda kendini yenileyebilir ancak aşırı kesim veya yangınlarla tahrip edilirse yenilenme özelliğini kaybeder.</div>
+      </div>
+
+      <div class="qa-card">
+        <div class="question-title">SORU 10. Yeryüzündeki sular güneşin etkisiyle ısınır, gökyüzüne yükselir, bulut oluşturur ve yağmur olarak tekrar yeryüzüne döner. Suyun doğadaki bu sürekli yolculuğunu (Su Döngüsünün aşamalarını) sırasıyla yazınız.</div>
+        <div class="answer-text"><strong>CEVAP:</strong>
+1. Buharlaşma (Suyun gaz haline gelmesi)
+2. Yoğuşma (Bulutların oluşması)
+3. Yağış (Yağmur veya kar olarak yağması)
+4. Toprağa Sızma ve Akış (Derelere ve yer altına karışması)</div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    function openQuestions() {
+      document.getElementById('landing-screen').style.display = 'none';
+      document.getElementById('questions-screen').style.display = 'block';
+    }
+
+    // GÜVENLİK SİSTEMİ
+    document.addEventListener('keydown', function (e) {
+      if (
+        e.key === 'PrintScreen' || 
+        (e.ctrlKey && e.key === 'p') || 
+        (e.ctrlKey && e.key === 's') || 
+        (e.ctrlKey && e.shiftKey && e.key === 'I') || 
+        e.key === 'F12'
+      ) {
+        triggerSecurity();
+        e.preventDefault();
+      }
+    });
+
+    window.addEventListener('blur', function() {
+      triggerSecurity();
+    });
+
+    window.addEventListener('focus', function() {
+      document.getElementById('security-overlay').style.display = 'none';
+    });
+
+    function triggerSecurity() {
+      document.getElementById('security-overlay').style.display = 'flex';
+    }
+  </script>
+</body>
+</html>
